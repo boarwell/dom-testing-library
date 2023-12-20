@@ -327,6 +327,9 @@ test('getDefaultNormalizer returns a normalizer that supports trim and collapseW
   // Default is trim: true and collapseWhitespace: true
   expect(getDefaultNormalizer()('  abc  def  ')).toEqual('abc def')
 
+  // Preserves characters that match \s but do not correspond to HTML whitespace
+  expect(getDefaultNormalizer()('　　abc　　def　　')).toEqual('abc　　def')
+
   // Turning off trimming should not turn off whitespace collapsing
   expect(getDefaultNormalizer({trim: false})('  abc  def  ')).toEqual(
     ' abc def ',

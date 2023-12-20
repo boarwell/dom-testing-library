@@ -70,7 +70,8 @@ function getDefaultNormalizer({
     let normalizedText = text
     normalizedText = trim ? normalizedText.trim() : normalizedText
     normalizedText = collapseWhitespace
-      ? normalizedText.replace(/\s+/g, ' ')
+      ? // Replaces only the whitespace characters as defined in the HTML spec.
+        normalizedText.replace(/[\t\n\r\f ]+/g, ' ')
       : normalizedText
     return normalizedText
   }
